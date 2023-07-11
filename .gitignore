@@ -1,2 +1,4 @@
 # exclude env
-*_env
+*env
+etc
+*.pyc
