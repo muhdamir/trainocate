@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Create a new task</h1>
+<form action="./" method="post">
+    <div class="mb-3">
+        <label for="task_name" class="form-label">Task Name</label>
+        <input type="text" name="task_name" id="task_name" class="form-control">
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <th scope="col">Task Id</th>
+            <th scope="col">Task Name</th>
+            <th scope="col">Operation</th>
+        </tr>
+        {% for dat in data %}
+        <tr id="{{dat.task_id}}">
+            <td scope="row">{{dat.task_id}}</td>
+            <td>{{dat.task_name}}</td>
+            <td>
+                <button type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-danger" target-data="{{dat.task_id}}"
+                    onclick="delete_task(this)">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block script %}
+<script>
+    function delete_task(event) {
+        const task_id = event.getAttribute("target-data")
+        fetch(`./${task_id}`, { method: "DELETE" }
+        ).then((response) => {
+            if (response.status >= 200) {
+                return response.json()
+            }
+        }
+        ).then(res => {
+            console.log(res.message)
+            if (res.message === "Successful") {
+                document.getElementById(event.getAttribute("target-data")).remove()
+            }
+        })
+    }
+</script>
+{% endblock %}

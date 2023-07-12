@@ -1,13 +1,12 @@
 from fastapi import FastAPI
 
-ch03 = FastAPI()
+from ch03.routers import template_router, todo_router
 
 
-@ch03.get("/")
-async def test_conn():
-    return True
+ch03 = FastAPI(
+    title="TrainocatE CH03 FastAPI Endpoints",
+)
 
-
-@ch03.get("/ha")
-async def haha():
-    return True
+# include router
+ch03.include_router(todo_router)
+ch03.include_router(template_router)

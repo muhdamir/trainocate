@@ -1,0 +1,1 @@
+from .base_repository_interface import BaseRepositoryInterface
