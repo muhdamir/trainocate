@@ -15,7 +15,7 @@ class BaseService(Generic[Repository]):
 
     def __init__(
         self,
-        repository: type[Repository],
-        session: Session,
+        repository: Repository = Depends(),
+        # session: Session,
     ) -> None:
-        self.repository = repository(session)
+        self.repository = repository

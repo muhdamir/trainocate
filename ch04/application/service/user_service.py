@@ -6,7 +6,7 @@ from fastapi import Depends
 from ch04.infrastructure.sqlite import get_session
 
 
-class UserService:
+class UserService(BaseService[UserRepository]):
     def __init__(self, repository: UserRepository = Depends()) -> None:
         self.repository = repository
 
