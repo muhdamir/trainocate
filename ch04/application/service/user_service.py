@@ -6,13 +6,9 @@ from fastapi import Depends
 from ch04.infrastructure.sqlite import get_session
 
 
-class UserService(BaseService[UserRepository]):
-    def __init__(
-        self,
-        repository: type[UserRepository] = UserRepository,
-        session: Session = Depends(get_session),
-    ) -> None:
-        super().__init__(repository, session)
+class UserService:
+    def __init__(self, repository: UserRepository = Depends()) -> None:
+        self.repository = repository
 
     def get_all(self):
         return self.repository.get_all()
