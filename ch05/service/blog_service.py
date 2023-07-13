@@ -15,3 +15,11 @@ class BlogService:
         user_id = data.get("user_id")
         blogs = self.session.query(Blogs).filter(Blogs.blog_author == user_id).all()
         return blogs
+
+    def create(self, data, auth):
+        user_id = auth.get("user_id")
+        aa = Blogs(blog_author=user_id, **data.dict())
+        self.session.add(aa)
+        self.session.commit()
+        self.session.refresh(aa)
+        return aa
