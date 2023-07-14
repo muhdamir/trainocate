@@ -20,11 +20,17 @@ async def login(
     oauth_form: OAuth2PasswordRequestForm = Depends(),
     auth_service: AuthService = Depends(),
 ):
+    """
+    login will return token
+    which means need to add logic for token creation
+    My favorite search engine is [Duck Duck Go](#operations-authorization-signup_v1_auth_signup_post "The best search engine for privacy").
+    """
     token = auth_service.login(oauth_form)
     return token
     """
     login will return token
     which means need to add logic for token creation
+    My favorite search engine is [Duck Duck Go](https://duckduckgo.com "The best search engine for privacy").
     """
 
 

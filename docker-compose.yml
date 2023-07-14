@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  fastapi:
+    container_name: fastapi--2
+    build:
+      context: .
+      dockerfile: Dockerfile
+  postgres:
+    container_name: postgres-db
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_USER=haha
+    ports:
+      - "5432:5432"
